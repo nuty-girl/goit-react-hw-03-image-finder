@@ -6,9 +6,7 @@ import PhotoCard from '../PhotoCard/PhotoCard';
 const Gallery = ({ photoCards }) => (
   <ul className={styles.gallery}>
     {photoCards.map(photoCard => (
-      <li className={styles.gallery_item} key={photoCard.id}>
-        <PhotoCard item={photoCard} />
-      </li>
+      <PhotoCard item={photoCard} key={photoCard.id} />
     ))}
   </ul>
 );

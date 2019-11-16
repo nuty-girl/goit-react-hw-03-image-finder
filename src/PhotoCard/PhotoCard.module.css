@@ -1,5 +1,3 @@
-@import '../Gallery/Gallery.module.css';
-
 .photo_card {
   position: relative;
   overflow: hidden;

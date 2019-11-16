@@ -14,9 +14,15 @@ export default class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { query } = this.state;
+    const { query, pageNumber } = this.state;
     if (prevState.query !== query) {
       this.fetchPhotoCards();
+    }
+    if (prevState.pageNumber !== pageNumber) {
+      window.scrollTo({
+        top: pageNumber * 1450,
+        behavior: 'smooth',
+      });
     }
   }
 

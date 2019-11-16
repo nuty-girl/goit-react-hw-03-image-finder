@@ -29,43 +29,45 @@ export default class PhotoCard extends Component {
     const { isModalOpen } = this.state;
 
     return (
-      <div className={styles.photo_card}>
-        <img src={item.webformatURL} alt="" />
-        <div className={styles.stats}>
-          <p className={styles.stats_item}>
-            <i className="material-icons">thumb_up</i>
-            {item.likes}
-          </p>
-          <p className={styles.stats_item}>
-            <i className="material-icons">visibility</i>
-            {item.views}
-          </p>
-          <p className={styles.stats_item}>
-            <i className="material-icons">comment</i>
-            {item.comments}
-          </p>
-          <p className={styles.stats_item}>
-            <i className="material-icons">cloud_download</i>
-            {item.downloads}
-          </p>
-        </div>
-        <button
-          type="button"
-          className={styles.fullscreen_button}
-          onClick={this.openModal}
-        >
-          <i className="material-icons">zoom_out_map</i>
-        </button>
-        {isModalOpen && (
-          <Modal onClose={this.closeModal}>
-            <div className="overlay">
-              <div className="modal">
-                <img src={item.largeImageURL} alt="" />
+      <li className={styles.gallery_item} key={item.id}>
+        <div className={styles.photo_card}>
+          <img src={item.webformatURL} alt="" />
+          <div className={styles.stats}>
+            <p className={styles.stats_item}>
+              <i className="material-icons">thumb_up</i>
+              {item.likes}
+            </p>
+            <p className={styles.stats_item}>
+              <i className="material-icons">visibility</i>
+              {item.views}
+            </p>
+            <p className={styles.stats_item}>
+              <i className="material-icons">comment</i>
+              {item.comments}
+            </p>
+            <p className={styles.stats_item}>
+              <i className="material-icons">cloud_download</i>
+              {item.downloads}
+            </p>
+          </div>
+          <button
+            type="button"
+            className={styles.fullscreen_button}
+            onClick={this.openModal}
+          >
+            <i className="material-icons">zoom_out_map</i>
+          </button>
+          {isModalOpen && (
+            <Modal onClose={this.closeModal}>
+              <div className="overlay">
+                <div className="modal">
+                  <img src={item.largeImageURL} alt="" />
+                </div>
               </div>
-            </div>
-          </Modal>
-        )}
-      </div>
+            </Modal>
+          )}
+        </div>
+      </li>
     );
   }
 }
