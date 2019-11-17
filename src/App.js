@@ -27,6 +27,9 @@ export default class App extends Component {
   }
 
   onSearch = query => {
+    if (this.state.query === query) {
+      return;
+    }
     this.setState({ query, photoCards: [], pageNumber: 1 });
   };
 
@@ -44,6 +47,12 @@ export default class App extends Component {
       .catch(error => {
         this.setState({ error });
       });
+  };
+
+  reset = () => {
+    this.setState({
+      query: '',
+    });
   };
 
   render() {
