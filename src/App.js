@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import styles from './App.module.css';
 import * as photoCardAPI from './services/photoCard-api';
 import SearchForm from './SearchForm/SearchForm';
@@ -11,6 +13,7 @@ export default class App extends Component {
     error: null,
     pageNumber: 1,
     query: '',
+    isLoading: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,6 +38,7 @@ export default class App extends Component {
 
   fetchPhotoCards = () => {
     const { query, pageNumber } = this.state;
+    this.setState({ isLoading: true });
 
     photoCardAPI
       .fetchPhotoCards(query, pageNumber)
@@ -42,6 +46,7 @@ export default class App extends Component {
         this.setState(state => ({
           photoCards: [...state.photoCards, ...photoCards],
           pageNumber: state.pageNumber + 1,
+          isLoading: false,
         }));
       })
       .catch(error => {
@@ -56,16 +61,16 @@ export default class App extends Component {
   };
 
   render() {
-    const { photoCards, error } = this.state;
+    const { photoCards, error, isLoading } = this.state;
 
     return (
       <div className={styles.App}>
         <SearchForm onSearch={this.onSearch} />
-
         {error && <ErrorNotification message={error.message} />}
-
+        {isLoading && (
+          <Loader type="ThreeDots" color="#grey" height={80} width={80} />
+        )}
         {photoCards.length > 0 && <Gallery photoCards={photoCards} />}
-
         {photoCards.length > 0 && (
           <button
             type="button"
